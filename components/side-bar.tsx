@@ -8,6 +8,8 @@ import {
   Home,
   AudioLines,
   PlusSquare,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
@@ -17,9 +19,12 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import { Button } from "./ui/button";
+import { useMute } from "@/providers/sound";
 
 export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
   const path = usePathname();
+  const { isMuted, toggleMute } = useMute()
   return (
     <aside className="w-1/3 lg:w-24 p-6 flex-col items-center border-r border-border h-screen sticky top-0 overflow-y-auto hidden md:flex">
       <div className="flex flex-col items-center gap-12 w-full">
@@ -83,6 +88,17 @@ export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
+          <div onClick={toggleMute} className="p-3 rounded-xl transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-accent/50">
+            {isMuted ? (
+              <VolumeX
+              className="w-7 h-7"
+              />
+            ): (
+              <Volume2
+                className="w-7 h-7"
+              />
+            )}
+          </div>
         </nav>
       </div>
       <div className="mt-auto w-full flex flex-col items-center">
