@@ -5,4 +5,7 @@ export type Post = {
   title: string,
   description: string | undefined,
   user: User
+  audioFile: {
+    key: string;
+  };
 }
