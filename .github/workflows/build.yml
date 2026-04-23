@@ -3,7 +3,7 @@ name: Build image of frontend
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   IMAGE_FRONTEND: audio-frontend
