@@ -7,6 +7,7 @@ import { getUrl } from "@/services/audio"
 import { Waviz } from "waviz"
 import Link from "next/link"
 import { useMute } from "@/providers/sound"
+import { Separator } from "../ui/separator"
 
 export function PostCard({ post }: { post: Post }) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -118,9 +119,11 @@ export function PostCard({ post }: { post: Post }) {
           <CardTitle>{post.title}</CardTitle>
           <CardDescription>{post.description}</CardDescription>
         </CardHeader>
-        <CardContent className="flex justify-center items-center w-full">
+        <div className="flex-grow" />
+        <CardContent className="pt-0 space-y-4">
+          <Separator />
 
-          <div className="flex justify-center items-center bg-gray-100 dark:bg-zinc-900 rounded-2xl w-full px-4 py-2">
+          <div className="flex justify-center items-center bg-gray-100 dark:bg-zinc-900 rounded-md w-full px-4 py-2">
             <canvas
               ref={canvasRef}
               width={1000}

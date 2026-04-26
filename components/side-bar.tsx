@@ -1,5 +1,4 @@
 "use client";
-import type { User } from "@/types/user";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -19,8 +18,12 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import { Button } from "./ui/button";
 import { useMute } from "@/providers/sound";
+
+type User = {
+  id: string;
+  name: string;
+}
 
 export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
   const path = usePathname();

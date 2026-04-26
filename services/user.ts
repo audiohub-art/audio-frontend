@@ -1,5 +1,5 @@
 "use server"
-import { createPublicApi } from "@/lib/api"
+import { createPublicApi, createPrivateApi } from "@/lib/api"
 import { signIn, auth } from "./auth";
 
 export async function register(name: string, password: string) {
@@ -27,6 +27,21 @@ export async function login(name: string, password: string) {
     return true
   } catch {
     return false
+  }
+}
+
+export async function getMe() {
+  try {
+    const api = await createPrivateApi();
+    const data = await api.get("/users/me");
+
+    return { data: data.data, error: null }
+  } catch (error) {
+    console.log("error : ", error)
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : "Failed to get User",
+    }
   }
 }
 
