@@ -5,9 +5,9 @@ import { PostList } from "@/components/post/list"
 export default async function Home() {
   const { data, error } = await getAllPosts();
   return (
-    <div className="flex flex-col flex-1 items-center justify-center min-h-screen bg-zinc-50 font-sans dark:bg-black p-8">
+    <div className="flex flex-col flex-1 items-center justify-center min-h-screen font-sans dark:bg-black pl-8 pr-8">
       {data && data.length > 0 ? (
-        <div className="w-full max-w-[2000px] mx-auto min-h-screen p-4 md:p-6 lg:p-8">
+        <div className="w-full max-w mx-auto min-h-screen">
           <PostList posts={data} />
         </div>
       ) : (

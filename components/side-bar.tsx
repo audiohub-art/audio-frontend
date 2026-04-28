@@ -1,5 +1,4 @@
 "use client";
-import type { User } from "@/types/user";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -19,14 +18,18 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import { Button } from "./ui/button";
 import { useMute } from "@/providers/sound";
+
+type User = {
+  id: string;
+  name: string;
+}
 
 export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
   const path = usePathname();
   const { isMuted, toggleMute } = useMute()
   return (
-    <aside className="w-1/3 lg:w-24 p-6 flex-col items-center border-r border-border h-screen sticky top-0 overflow-y-auto hidden md:flex">
+    <aside className="flex flex-col items-center flex-shrink-0 w-22 py-8 px-2 border-r border-border h-full bg-background overflow-y-auto overscroll-contain z-10">
       <div className="flex flex-col items-center gap-12 w-full">
         <Link href="/" className="transition-opacity hover:opacity-80">
           <Image src="/audio.svg" alt="AudioHub" width={46} height={46} />
@@ -42,27 +45,13 @@ export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
           >
             <Home className="w-7 h-7" strokeWidth={path === "/" ? 2.5 : 2} />
           </Link>
-          <Link
-            href="/post"
-            className={`p-3 rounded-xl transition-all duration-200 ${
-              path === "/post"
-                ? "bg-accent text-accent-foreground"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-            }`}
-          >
-            <AudioLines
-              className="w-7 h-7"
-              strokeWidth={path === "/post" ? 2.5 : 2}
-            />
-          </Link>
           {user && (
             <Link
               href="/post/create"
-              className={`p-3 rounded-xl transition-all duration-200 ${
-                path === "/post/create"
+              className={`p-3 rounded-xl transition-all duration-200 ${path === "/post/create"
                   ? "bg-accent text-accent-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
-              }`}
+                }`}
             >
               <PlusSquare
                 className="w-7 h-7"
@@ -70,35 +59,6 @@ export const Sidebar: React.FC<{ user: User | undefined }> = ({ user }) => {
               />
             </Link>
           )}
-          <DropdownMenu modal={false}>
-            <DropdownMenuTrigger className="outline-none rounded-full focus-visible:ring-2 focus-visible:ring-ring">
-              <div className="flex items-center justify-center transition-opacity hover:opacity-80">
-                <CircleUserRound className="w-[40px] h-[40px] text-muted-foreground" />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent asChild>
-              {user ? (
-                <DropdownMenuItem onSelect={() => signOut({ redirectTo: "/" })}>
-                  Sign Out
-                </DropdownMenuItem>
-              ) : (
-                <DropdownMenuItem asChild>
-                  <Link href={"/login"}>Sign In</Link>
-                </DropdownMenuItem>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <div onClick={toggleMute} className="p-3 rounded-xl transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-accent/50">
-            {isMuted ? (
-              <VolumeX
-              className="w-7 h-7"
-              />
-            ): (
-              <Volume2
-                className="w-7 h-7"
-              />
-            )}
-          </div>
         </nav>
       </div>
       <div className="mt-auto w-full flex flex-col items-center">

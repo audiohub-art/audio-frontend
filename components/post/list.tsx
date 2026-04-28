@@ -6,7 +6,8 @@ import { BlurFade } from "../ui/blur-fade";
 import { BigPostCard } from "./big-card";
 
 const breakpoints = {
-  default: 4,
+  default: 6,
+  1920: 4,
   1024: 3,
   640: 2,
   400: 1,

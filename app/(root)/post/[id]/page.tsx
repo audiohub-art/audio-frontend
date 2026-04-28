@@ -1,6 +1,7 @@
 import { getPost, getAllPosts } from "@/services/post";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription } from "@/components/ui/empty";
 import { PostList } from "@/components/post/list";
+import { Metadata } from "next";
 
 interface PostPageProps {
   params: Promise<{
@@ -8,10 +9,35 @@ interface PostPageProps {
   }>;
 }
 
+async function getProductById(id: string) {
+  const { data, error } = await getPost(id);
+  return { data, error };
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const { data } = await getProductById(id);
+  if (!data) {
+    return {
+      title: "Post not found",
+      description: "This doesn't exist.",
+    };
+  }
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      title: data.title,
+      description: data.description ?? "",
+      url: `/post/${id}`,
+    }
+  }
+}
+
 export default async function ProductPage({ params }: PostPageProps) {
   const { id } = await params;
   const [{ data, error }, { data: posts }] = await Promise.all([
-     getPost(id),
+     getProductById(id),
      getAllPosts(),
    ])
   if (error || !data) {

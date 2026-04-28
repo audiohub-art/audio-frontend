@@ -25,7 +25,7 @@ export default function PostCreate() {
 
   return (
     <div className="">
-      <div className="border-b border-border p-6 flex justify-between items-center">
+      <div className="border-b border-t border-border p-6 flex justify-between items-center">
         <h1>Create Post</h1>
         <Button type="submit" form="form-post" className="">Publish</Button>
       </div>
