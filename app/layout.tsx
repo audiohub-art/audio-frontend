@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL as string,
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://audiohub.art",
   ),
   title: {
     default: "AudioHub.art | Sound Social Network",
