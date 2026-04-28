@@ -116,8 +116,8 @@ export function PostCard({ post }: { post: Post }) {
     <Card className="w-full h-max shadow-xl dark:border-zinc-800 transition-all hover:shadow-2xl">
       <div onMouseEnter={handlePlay} onMouseLeave={handleStop}>
         <CardHeader>
-          <CardTitle>{post.title}</CardTitle>
-          <CardDescription>{post.description}</CardDescription>
+          <CardTitle className="truncate">{post.title}</CardTitle>
+          <CardDescription className="truncate">{post.description}</CardDescription>
         </CardHeader>
         <div className="flex-grow" />
         <CardContent className="pt-0 space-y-4">

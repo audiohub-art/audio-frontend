@@ -15,7 +15,7 @@ export default async function RootLayout({
         <Sidebar user={user} />
         <main className="flex flex-col flex-1 min-w-0 w-full">
           <Header user={user} />
-          <div className="flex-1 overflow-y-auto overflow-contain p-4 md:p-6">
+          <div className="flex-1 overflow-y-auto overflow-contain">
             {children}
           </div>
         </main>
