@@ -38,10 +38,8 @@ export async function updatePost(id: string, title: string, description: string)
     const api = await createPrivateApi();
 
     const res = await api.put(`/posts/modify/${id}`, { title, description });
-    console.log("res : ", res)
     return { data: undefined, error: null }
   } catch (error) {
-    console.log("error : ", error)
     return {
       data: null,
       error: error instanceof Error ? error.message : "Failed to create post",

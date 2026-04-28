@@ -60,7 +60,6 @@ export function PostCard({ post }: { post: Post }) {
 
   useEffect(() => {
     if (audioRef.current) {
-      console.log("unmute or mute :", isMuted)
       audioRef.current.muted = isMuted;
     }
   }, [isMuted]);

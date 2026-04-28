@@ -1,11 +1,10 @@
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card"
 import { useState, useRef } from "react"
 import { Upload, LoaderCircle } from "lucide-react"
-import { uploadAudio } from "@/services/audio";
 import { toast } from "sonner";
 import { AudioPlayer } from "./audio-player";
 
-const ALLOWED_TYPES = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/mp4", "audio/webm", "audio/mp3"];
+const ALLOWED_TYPES = ["audio/vnd.wave", "audio/x-wav", "audio/wave","audio/mpeg", "audio/wav", "audio/ogg", "audio/mp4", "audio/webm", "audio/mp3"];
 const MAX_SIZE_MB = 100;
 
 export function AudioUpload({ getPostId }: { getPostId: (postId: string) => void}) {

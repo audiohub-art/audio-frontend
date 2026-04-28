@@ -37,7 +37,6 @@ export async function getMe() {
 
     return { data: data.data, error: null }
   } catch (error) {
-    console.log("error : ", error)
     return {
       data: null,
       error: error instanceof Error ? error.message : "Failed to get User",
