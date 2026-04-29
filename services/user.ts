@@ -50,3 +50,34 @@ export async function getUser() {
   const user = session.user;
   return user
 }
+
+export async function getFollowStatus(targetUserId: string): Promise<boolean> {
+  try {
+    const api = await createPrivateApi();
+    const response = await api.get(`/users/${targetUserId}/follow-status`);
+    return response.data.isFollowing;
+  } catch (error) {
+    console.error('Error checking follow status:', error);
+    return false;
+  }
+}
+
+export async function followUser(userId: string): Promise<void> {
+  try {
+    const api = await createPrivateApi();
+    await api.post(`/users/${userId}/follow`);
+  } catch (error) {
+    console.error('Error following user:', error);
+    throw error;
+  }
+}
+
+export async function unfollowUser(userId: string): Promise<void> {
+  try {
+    const api = await createPrivateApi();
+    await api.delete(`/users/${userId}/follow`);
+  } catch (error) {
+    console.error('Error unfollowing user:', error);
+    throw error;
+  }
+}

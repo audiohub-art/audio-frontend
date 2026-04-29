@@ -1,8 +1,9 @@
 import { User as UserIcon } from 'lucide-react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Separator } from '@/components/ui/separator';
 import type { User } from '@/types/user';
+import { FollowButton } from './follow-button';
 import { PostList } from '../post/list';
 
 export function UserProfile({ user }: { user: User }) {
@@ -24,6 +25,10 @@ export function UserProfile({ user }: { user: User }) {
               <UserIcon className="h-6 w-6 text-slate-400" />
               {user.name}
             </h1>
+
+            <div className="flex justify-center sm:justify-start mt-4">
+              <FollowButton userId={user.id} />
+            </div>
           </div>
         </CardContent>
       </Card>
