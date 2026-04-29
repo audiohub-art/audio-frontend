@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionProvider } from "@/providers/session";
 import { auth } from "@/services/auth"
 import { Toaster } from "sonner";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -68,6 +69,7 @@ export default async function RootLayout({
       <body className="h-full overflow-hidden flex flex-col">
         <SessionProvider session={session}>
           {children}
+          <Script defer src="https://umami.audiohub.art/script.js" data-website-id="7979cfa6-221b-442a-818a-eb651d2a4816"></Script>
           <Toaster/>
         </SessionProvider>
       </body>
