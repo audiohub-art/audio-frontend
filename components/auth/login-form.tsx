@@ -34,18 +34,18 @@ export function LoginForm({
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
-      const res = await login(name, password)
+      const res = await login(email, password)
       if (!res) {
         setLoading(false);
         toast.error("Failed to login, Please try again", { position: "bottom-center"})
       } else {
         toast.success("Login successfully", { position: "bottom-center"})
         router.push("/");
-        router.refresh(); // Met à jour le contexte de session dans toute l'app
+        router.refresh();
       }
     } catch {
       setLoading(false);
@@ -59,19 +59,19 @@ export function LoginForm({
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
-            Enter your name below to login to your account
+            Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
-                  id="name"
-                  type="texte"
-                  name="name"
-                  placeholder="name"
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="email"
                   required
                 />
               </Field>

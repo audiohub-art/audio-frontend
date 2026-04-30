@@ -64,6 +64,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               <Input id="name" type="text" placeholder="John Doe" name="name" required />
             </Field>
             <Field>
+              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <Input id="email" type="email" placeholder="john.doe@example.com" name="email" required />
+            </Field>
+            <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
               <Input id="password" type="password" name="password" required />
               <FieldDescription>
