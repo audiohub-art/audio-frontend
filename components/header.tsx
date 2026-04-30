@@ -22,6 +22,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 type User = {
   id: string;
   name: string;
+  slug: string;
 }
 
 export const Header: React.FC<{ user: User | undefined }> = ({ user }) => {
@@ -47,7 +48,7 @@ export const Header: React.FC<{ user: User | undefined }> = ({ user }) => {
             />
           )}
         </div>
-      <Link href="/me">
+        <Link href={user ? `/${user.slug}` : "/login"}>
         <CircleUserRound className="w-10 h-10 " />
       </Link>
       <DropdownMenu modal={false}>

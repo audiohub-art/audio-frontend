@@ -21,20 +21,28 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://audiohub.art",
   ),
   title: {
-    default: "AudioHub.art | Sound Social Network",
+    default: "AudioHub.art | The Social Network for Audio Creators",
     template: "%s | AudioHub.art",
   },
-  description: "A Sound Social Network",
+  description: "Join AudioHub.art, the dedicated sound social network. Connect with musicians, podcasters, and sound designers. Share your audio projects and collaborate.",
   applicationName: "AudioHub.art",
-  keywords: ["sound", "social", "network", "audio", "audiohub", "audiohub.art", "hub"],
+  keywords: ["sound social network", "audio creators community", "share music online", "musicians network", "audiohub art"],
   creator: "Antoine Fabre",
   openGraph: {
     type: "website",
-    locale: "en",
+    locale: "en_US",
     url: "/",
-    title: "AudioHub.art",
-    description: "A Sound Social Network",
+    title: "AudioHub.art - The Community for Sound Enthusiasts",
+    description: "Discover a new way to share and experience sound. Join the ultimate social network for audio creators.",
     siteName: "AudioHub.art",
+    images: [
+      {
+        url: '/og-image.png', // Créez une belle image de 1200x630px
+        width: 1200,
+        height: 630,
+        alt: 'AudioHub.art Preview',
+      },
+    ],
   },
   robots: {
     index: true,
@@ -50,7 +58,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico"
+    apple: "/apple-touch-icon.png"
   }
 };
 

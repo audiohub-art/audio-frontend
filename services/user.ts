@@ -2,22 +2,23 @@
 import { createPublicApi, createPrivateApi } from "@/lib/api"
 import { signIn, auth } from "./auth";
 
-export async function register(name: string, password: string) {
+export async function register(name: string, email: string, password: string) {
   try {
     const api = await createPublicApi();
-    await api.post("/auth/register", { name, password });
+    await api.post("/auth/register", { name, email, password });
     return true;
   } catch {
     return false
   }
 }
 
-export async function login(name: string, password: string) {
+export async function login(email: string, password: string) {
   try {
     const api = await createPublicApi();
-    const { data } = await api.post("/auth/login", { name, password });
+    const { data } = await api.post("/auth/login", { email, password });
     await signIn("credentials", {
       id: data.user.id,
+      slug: data.user.slug,
       name: data.user.name,
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
@@ -44,8 +45,22 @@ export async function getMe() {
   }
 }
 
+export async function getUserInfo(userName: string) {
+  try {
+    const api = await createPrivateApi();
+    const data = await api.get(`/users/${userName}`);
+    return { data: data.data, error: null }
+  } catch (error) {
+    return {
+      data: null,
+      error: error instanceof Error ? error.message : "Failed to get User",
+    }
+  }
+}
+
 export async function getUser() {
   const session = await auth();
+  console.log("session", session)
   if (!session?.user) return undefined;
   const user = session.user;
   return user
@@ -65,7 +80,7 @@ export async function getFollowStatus(targetUserId: string): Promise<boolean> {
 export async function followUser(userId: string): Promise<void> {
   try {
     const api = await createPrivateApi();
-    await api.post(`/users/${userId}/follow`);
+    await api.post(`/users/follow/${userId}`);
   } catch (error) {
     console.error('Error following user:', error);
     throw error;
@@ -75,7 +90,7 @@ export async function followUser(userId: string): Promise<void> {
 export async function unfollowUser(userId: string): Promise<void> {
   try {
     const api = await createPrivateApi();
-    await api.delete(`/users/${userId}/follow`);
+    await api.post(`/users/unfollow/${userId}`);
   } catch (error) {
     console.error('Error unfollowing user:', error);
     throw error;

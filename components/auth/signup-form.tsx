@@ -32,9 +32,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     try {
-      const res = await register(name, password)
+      const res = await register(name, email, password)
       if (!res) {
         toast.error("Failed to create account, please try again", { position: "bottom-center"})
       } else {

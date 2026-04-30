@@ -10,6 +10,7 @@ export const { handlers, signIn, signOut, auth }  = NextAuth({
       credentials: {
         accessToken: { label: "accessToken", type: "text" },
         refreshToken: { label: "refreshToken", type: "text" },
+        slug: { label: "slug", type: "text" },
         name: { label: "name", type: "text" },
         id: { label: "id", type: "text" },
         accessTokenExpires: { label: "accessTokenExpires", type: "number" },
@@ -19,6 +20,7 @@ export const { handlers, signIn, signOut, auth }  = NextAuth({
         return {
           id: credentials.id as string,
           name: credentials.name as string,
+          slug: credentials.slug as string,
           accessToken: credentials.accessToken as string,
           refreshToken: credentials.refreshToken as string,
           accessTokenExpires: Number(credentials.accessTokenExpires),
@@ -33,6 +35,7 @@ export const { handlers, signIn, signOut, auth }  = NextAuth({
         return {
           ...token,
           id: user.id,
+          slug: user.slug,
           accessToken: user.accessToken,
           refreshToken: user.refreshToken,
           accessTokenExpires: user.accessTokenExpires,
@@ -49,6 +52,7 @@ export const { handlers, signIn, signOut, auth }  = NextAuth({
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
+        session.user.slug = token.slug;
         session.accessToken = token.accessToken;
         session.error = token.error;
       }

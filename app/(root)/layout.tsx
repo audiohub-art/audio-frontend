@@ -9,6 +9,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
+  console.log("user", user)
   return (
     <SoundProvider>
       <div className="flex h-full w-full bg-background overflow-hidden">
