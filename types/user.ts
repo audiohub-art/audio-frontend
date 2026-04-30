@@ -3,6 +3,7 @@ import type { Post } from "./post";
 export type User = {
   id: string,
   name: string,
+  slug: string,
   email: string,
   createdAt: Date;
   posts: Post[]

@@ -60,7 +60,6 @@ export async function getUserInfo(userName: string) {
 
 export async function getUser() {
   const session = await auth();
-  console.log("session", session)
   if (!session?.user) return undefined;
   const user = session.user;
   return user

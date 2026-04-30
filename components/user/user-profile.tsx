@@ -1,3 +1,5 @@
+"use client";
+
 import { User as UserIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -5,10 +7,12 @@ import { Separator } from '@/components/ui/separator';
 import type { User } from '@/types/user';
 import { FollowButton } from './follow-button';
 import { PostList } from '../post/list';
+import { useSession } from 'next-auth/react';
 
 export function UserProfile({ user }: { user: User }) {
   const initials = user.name.substring(0, 2).toUpperCase();
-
+  const { data: session } = useSession();
+  const isOwnProfile = session?.user?.slug === user.slug;
   return (
     <div className="container mx-auto py-8 px-4 max-w-5xl space-y-8">
 
@@ -25,10 +29,13 @@ export function UserProfile({ user }: { user: User }) {
               <UserIcon className="h-6 w-6 text-slate-400" />
               {user.name}
             </h1>
-
-            <div className="flex justify-center sm:justify-start mt-4">
-              <FollowButton userId={user.id} />
-            </div>
+            {isOwnProfile ? (
+              <p className="text-slate-600">Your profile</p>
+            ) : (
+              <div className="flex justify-center sm:justify-start mt-4">
+                <FollowButton userId={user.id} />
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
